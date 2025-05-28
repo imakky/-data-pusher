@@ -47,7 +47,6 @@ Thumbs.db
 
 logs/
 swagger.json
-/config/
 .qodo
 
 # sonarqube
