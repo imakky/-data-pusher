@@ -4,61 +4,12 @@ npm i
 
 # I am using this for creating tables 
 
--- Table: public.Accounts
-
--- DROP TABLE IF EXISTS public."Accounts";
-
-CREATE TABLE IF NOT EXISTS public."Accounts"
-(
-    id integer NOT NULL DEFAULT nextval('"Accounts_id_seq"'::regclass),
-    email character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    account_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    app_secret character varying(255) COLLATE pg_catalog."default",
-    website character varying(255) COLLATE pg_catalog."default",
-    "createdAt" timestamp with time zone NOT NULL,
-    "updatedAt" timestamp with time zone NOT NULL,
-    CONSTRAINT "Accounts_pkey" PRIMARY KEY (id),
-    CONSTRAINT "Accounts_email_key" UNIQUE (email)
-)
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public."Accounts"
-    OWNER to postgres;
+![image](https://github.com/user-attachments/assets/6cc2a5e1-2db7-477a-998b-b38c80d5234a)
 
 
--- Table: public.Destinations
 
--- DROP TABLE IF EXISTS public."Destinations";
+![image](https://github.com/user-attachments/assets/4c7e0870-4b56-4810-848c-2536adb057e1)
 
-CREATE TABLE IF NOT EXISTS public."Destinations"
-(
-    id integer NOT NULL DEFAULT nextval('"Destinations_id_seq"'::regclass),
-    account_id integer NOT NULL,
-    url character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    http_method "enum_Destinations_http_method" NOT NULL,
-    headers jsonb NOT NULL,
-    "createdAt" timestamp with time zone NOT NULL,
-    "updatedAt" timestamp with time zone NOT NULL,
-    CONSTRAINT "Destinations_pkey" PRIMARY KEY (id),
-    CONSTRAINT "Destinations_account_id_fkey" FOREIGN KEY (account_id)
-        REFERENCES public."Accounts" (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-)
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public."Destinations"
-    OWNER to postgres;
--- Index: destinations_account_id_url_http_method
-
--- DROP INDEX IF EXISTS public.destinations_account_id_url_http_method;
-
-CREATE UNIQUE INDEX IF NOT EXISTS destinations_account_id_url_http_method
-    ON public."Destinations" USING btree
-    (account_id ASC NULLS LAST, url COLLATE pg_catalog."default" ASC NULLS LAST, http_method ASC NULLS LAST)
-    TABLESPACE pg_default;
 
 
 # After Complete the setup hti this cmd
